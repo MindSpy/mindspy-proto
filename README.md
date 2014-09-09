@@ -1,2 +1,2 @@
-mindspy-proto
+MindSpy-proto
 =============
