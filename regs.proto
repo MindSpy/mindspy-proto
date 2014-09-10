@@ -14,11 +14,12 @@ message Request {
   }
   required Action action = 1;
   required uint64 timestamp = 2;
-  required uint32 reqid = 7;
-  optional bool stream = 6 [default = false];
   optional uint32 start = 3;
   optional uint32 count = 4;
   optional bytes payload = 5; // arbitrary payload interpreted by the action handler
+  optional bool stream = 6 [default = false];
+  required uint32 reqid = 7;
+  optional int32 module = 8 [default = -1];
 }
 
 message State {
@@ -40,7 +41,8 @@ message Response {
   optional ErrNo error = 1 [default = NO_ERROR];
   optional string error_msg =2;
   required uint64 timestamp = 3;
-  required uint32 reqid = 6;
   repeated State state = 4;
   repeated Sample sample = 5;
+  required uint32 reqid = 6;
+  required int32 module = 7;
 }
