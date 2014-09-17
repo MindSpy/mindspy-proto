@@ -21,7 +21,6 @@ message Sample {
 
 message GetSamples {
   required uint32 count = 1;
-  required bool stream = 2 [default = false];
 }
 
 message GetState {
@@ -36,11 +35,12 @@ message SetState {
 message Request {
   required uint64 timestamp = 1;
   required uint32 reqid = 2;
-  optional int32 module = 3 [default = -1];
+  optional int32 module = 3;
+  optional bool stream = 4 [default = false];
 
-  optional GetSamples getSamples = 4;
-  optional GetState getState = 5;
-  optional SetState setState = 6;
+  optional GetSamples getSamples = 5;
+  optional GetState getState = 6;
+  optional SetState setState = 7;
 }
 
 message Response {
