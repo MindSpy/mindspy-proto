@@ -3,9 +3,9 @@ option java_package = "org.mindspy.protobufs";
 option java_outer_classname = "Regs";
 
 message Separator {
-  required uint64 size = 1;
+  required uint32 size = 1;
+  required bool last = 2;
 }
-
 
 message State {
   required uint32 address = 1;
@@ -16,8 +16,6 @@ message Sample {
   required uint64 sequence = 1;
   repeated int32 payload = 2 [packed=true];
 }
-
-
 
 message GetSamples {
   required uint32 count = 1;
@@ -31,11 +29,10 @@ message SetState {
   repeated State states = 1;
 }
 
-
 message Request {
   required uint64 timestamp = 1;
   required uint32 reqid = 2;
-  optional int32 module = 3;
+  optional uint32 module = 3;
   optional bool stream = 4 [default = false];
 
   optional GetSamples getSamples = 5;
@@ -44,11 +41,12 @@ message Request {
 }
 
 message Response {
-  optional string error_msg =2;
-  required uint64 timestamp = 3;
-  required uint32 reqid =4;
-  optional int32 module = 5 [default = -1];
+  required uint64 timestamp = 1;
+  required uint32 reqid =2;
+  required uint32 module = 3;
 
-  repeated State states = 6;
-  repeated Sample samples = 7;
+  repeated State states = 4;
+  repeated Sample samples = 5;
+
+  optional string error_msg =6;
 }
