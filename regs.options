@@ -1,3 +1,7 @@
 Sample.payload type:FT_STATIC max_count:32
 Response.error_msg type:FT_STATIC max_size:32
 Request.payload type:FT_STATIC max_size:32
+Response.samples type:FT_STATIC max_count:10
+Response.states type:FT_STATIC max_count:10
+SetState.states type:FT_STATIC max_count:10
+GetState.addresses type:FT_STATIC max_count:10
