@@ -29,6 +29,9 @@ message SetState {
   repeated State states = 1;
 }
 
+message GetModelName {
+}
+
 message Request {
   required uint64 timestamp = 1;
   required uint32 reqid = 2;
@@ -38,6 +41,7 @@ message Request {
   optional GetSamples getSamples = 5;
   optional GetState getState = 6;
   optional SetState setState = 7;
+  optional GetModelName getModelName = 8;
 }
 
 message Response {
@@ -47,6 +51,7 @@ message Response {
 
   repeated State states = 4;
   repeated Sample samples = 5;
+  optional string modelName = 6;
 
-  optional string error_msg =6;
+  optional string error_msg =7;
 }
