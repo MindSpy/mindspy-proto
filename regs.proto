@@ -47,7 +47,7 @@ message Request {
 message Response {
   required uint64 timestamp = 1;
   required uint32 reqid =2;
-  required uint32 module = 3;
+  optional uint32 module = 3;
 
   repeated State states = 4;
   repeated Sample samples = 5;
