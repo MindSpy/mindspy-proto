@@ -5,11 +5,11 @@ all: clean regs_pb.c regs_pb.cc regs_pb2.py Regs.java
 clean:
 	rm regs_pb.[ch]* regs_pb2.py Regs.java registers_pb || true
 
-regs_pb.c:
+proto.c:
 	protoc --plugin=$$(which protoc-gen-nanopb) --nanopb_out=. -o registers_pb regs.proto
-	mv regs.pb.h regs_pb.h
-	mv regs.pb.c regs_pb.c
-	sed -i 's/regs[.]pb[.]h/regs_pb.h/' regs_pb.c
+	mv regs.pb.h proto.h
+	mv regs.pb.c proto.c
+	sed -i 's/regs[.]pb[.]h/proto.h/' proto.c
 
 regs_pb.cc:
 	protoc --cpp_out=. regs.proto
