@@ -1,28 +1,30 @@
 
 
-all: clean regs_pb.c regs_pb.cc regs_pb2.py Regs.java 
+all: clean proto.c Proto.cpp proto.py Proto.java 
 
 clean:
-	rm regs_pb.[ch]* regs_pb2.py Regs.java registers_pb || true
+	rm proto.[ch]* proto.py Proto.java Proto.[ch]pp || true
 
 proto.c:
-	protoc --plugin=$$(which protoc-gen-nanopb) --nanopb_out=. -o registers_pb regs.proto
-	mv regs.pb.h proto.h
-	mv regs.pb.c proto.c
-	sed -i 's/regs[.]pb[.]h/proto.h/' proto.c
+	protoc --plugin=$$(which protoc-gen-nanopb) --nanopb_out=. -o mindspy.pb mindspy.proto
+	mv mindspy.pb.h proto.h
+	mv mindspy.pb.c proto.c
+	rm mindspy.pb || true
+	sed -i 's/mindspy[.]pb[.]h/proto.h/g' proto.[hc]
 
-regs_pb.cc:
-	protoc --cpp_out=. regs.proto
-	mv regs.pb.h regs_pb.hh
-	mv regs.pb.cc regs_pb.cc
-	sed -i 's/regs[.]pb[.]h/regs_pb.hh/' regs_pb.cc
+Proto.cpp:
+	protoc --cpp_out=. mindspy.proto
+	mv mindspy.pb.h Proto.hpp
+	mv mindspy.pb.cc Proto.cpp
+	sed -i 's/mindspy[.]pb[.]h/Proto.hpp/' Proto.[hc]pp
 
-regs_pb2.py:
-	protoc  --python_out=. regs.proto
-	rm regs_pb2.pyc || true
+proto.py:
+	protoc  --python_out=. mindspy.proto
+	mv mindspy_pb2.py proto.py
+	rm mindspy.pyc || true
 
-Regs.java:
-	protoc  --java_out=. regs.proto
-	mv org/mindspy/protobufs/Regs.java ./
+Proto.java:
+	protoc  --java_out=. mindspy.proto
+	mv org/mindspy/protobufs/Proto.java ./
 	rm org -fr
 
