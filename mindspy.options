@@ -1,7 +1,7 @@
-Sample.payload type:FT_STATIC max_count:8
-Response.error_msg type:FT_STATIC max_size:64
-Response.samples type:FT_STATIC max_count:16
-Response.states type:FT_STATIC max_count:16
-Response.modelName type:FT_STATIC max_size:16
-SetState.states type:FT_STATIC max_count:16
-GetState.addresses type:FT_STATIC max_count:16
+mindspy.protobufs.Sample.payload type:FT_STATIC max_count:32
+mindspy.protobufs.Response.error_msg type:FT_STATIC max_size:64
+mindspy.protobufs.Response.modelName type:FT_STATIC max_size:16
+mindspy.protobufs.Response.samples type:FT_STATIC max_count:16
+mindspy.protobufs.Response.states type:FT_STATIC max_count:16
+mindspy.protobufs.SetState.states type:FT_STATIC max_count:16
+mindspy.protobufs.GetState.addresses type:FT_STATIC max_count:16

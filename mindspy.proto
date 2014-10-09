@@ -1,10 +1,11 @@
 
 option java_package = "org.mindspy.protobufs";
-option java_outer_classname = "Regs";
+option java_outer_classname = "Proto";
+
+package mindspy.protobufs;
 
 // separate the responses (not used yet)
 message Separator {
-  required uint32 size = 1;
   required bool last = 2;
 }
 
@@ -20,57 +21,57 @@ message Sample {
   repeated int32 payload = 2 [packed=true];
 }
 
-// mapped to ISensor::getSamples
+// mapped to Sensor::getSamples
 message GetSamples {
   required uint32 count = 1;
 }
 
-// mapped to ISensor::getState
+// mapped to Sensor::getState
 message GetState {
   repeated uint32 addresses = 1 [packed=true];
 }
 
-// mapped to ISensor::setState
+// mapped to Sensor::setState
 message SetState {
   repeated State states = 1;
 }
 
-// maped to ISensor::getModelName
+// maped to Sensor::getModelName
 message GetModelName {
 }
 
-// request that is mapped to ISensor instances
+// request that is mapped to Sensor instances
 message Request {
   // timestamp of the request
   required uint64 timestamp = 1;
   // id of the request
   required uint32 reqid = 2;
-  // which ISensor to use (if undefined use all yielding in multiple responses)
+  // which Sensor to use (if undefined use all yielding in multiple responses)
   optional uint32 module = 3;
   // repeat the responses indefinitely
   optional bool stream = 4 [default = false];
 
-  // ISensor mappings
+  // Sensor mappings
   optional GetSamples getSamples = 5;
   optional GetState getState = 6;
   optional SetState setState = 7;
   optional GetModelName getModelName = 8;
 }
 
-// response from ISensor instances
+// response from Sensor instances
 message Response {
   // timestamp of the responses
   required uint64 timestamp = 1;
   // id of the request to which we are responding
   required uint32 reqid =2;
-  // which ISensor we used to generate this reponse
+  // which Sensor we used to generate this reponse
   optional uint32 module = 3;
 
-  // requested ISensor state registers (getState)
+  // requested Sensor state registers (getState)
   repeated State states = 4;
-  // ISensor samples
+  // Sensor samples
   repeated Sample samples = 5;
-  // ISensor model name
+  // Sensor model name
   optional string modelName = 6;
 
   // something gone wrong?
